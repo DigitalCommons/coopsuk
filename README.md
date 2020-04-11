@@ -61,6 +61,19 @@ Remember to put the right prefix in front of the variable. It should
 match the project name defined in `package.json`, so in this case is 
 `playground`, but if you're doing this in another project it won't be.
 
+A script for building, deploying and setting versions is available as well. 
+It will set the version and build and deploy for you 
+for faster development. To use this run (this will just build and deploy the map to 
+the dev server (specified in deploy_targets/dev)): 
+        ./deploy_targets/configdeploy.sh
+This will deploy the current version of the map to the dev server (dev by default)
+You can also provide arguments for the script to change versions and deploy to the production server.
+The first argument provided to the configdeploy.sh is the sea-map version
+The second argument is the configuration script (dev/prod) in the deploy_targets folder.
+        ./deploy_targets/configdeploy.sh 0.1.25 dev
+you can also leave out the second argument, it will default to the dev script.
+        ./deploy_targets/configdeploy.sh 0.1.25
+
 ### ssh keys etc.
 
 Depending on the deployment URL you've chosen, you may need to set up
