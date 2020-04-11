@@ -1,0 +1,29 @@
+# For Vim users:
+*.swp
+*.swo
+
+# Emacs
+*~
+*#
+
+# LibreOffice:
+.~*#
+
+# VSCode
+.vscode
+
+# General:
+*.zip
+
+# Convention for old files held temporarily in local filesystem:
+*.old
+junk
+
+# Mac OS/X cruft:
+.DS_Store
+
+# generated files
+/build/
+/node_modules/
+npm-debug.log
+config/version.json

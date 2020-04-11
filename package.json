@@ -1,0 +1,23 @@
+{
+  "name": "coopsuk",
+  "version": "0.1.0",
+  "description": "Test area for SEA mapping projects",
+  "main": "index.js",
+  "config": {
+    "deploy_to": "",
+    "deploy_user": "www-data",
+    "deploy_group": "www-data"
+  },
+  "scripts": {
+    "build": "sea-site-build -c config -m node_modules/sea-map -d build src/*",
+    "deploy": "rsync -avzc --rsync-path='sudo rsync' --owner=\"$npm_package_config_deploy_owner\" --group=\"$npm_package_config_deploy_group\" --exclude=build.txt --exclude=.* build/out/ \"${npm_package_config_deploy_to:?Please define the '$npm_package_name:deploy_to' npm config parameter}\"",
+    "dev": "php -t build/out -S localhost:8080"
+  },
+  "author": "Solidarity Economy Association",
+  "license": "UNLICENSED",
+  "repository": "github:SolidarityEconomyAssociation/coopsuk",
+  "dependencies": {
+    "sea-map": "SolidarityEconomyAssociation/sea-map#semver:^0.1.25"
+  },
+  "devDependencies": {}
+}

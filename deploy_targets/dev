@@ -1,0 +1,1 @@
+npm config set coopsuk:deploy_to dev-0:/var/www/vhosts/coopsuk.solidarityeconomy.coop/www/
