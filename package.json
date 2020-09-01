@@ -1,7 +1,7 @@
 {
   "name": "coopsuk",
   "version": "0.1.0",
-  "description": "Test area for SEA mapping projects",
+  "description": "Co-ops UK SEA mapping project",
   "main": "index.js",
   "config": {
     "deploy_to": "",
