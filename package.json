@@ -17,7 +17,7 @@
   "license": "UNLICENSED",
   "repository": "github:SolidarityEconomyAssociation/coopsuk",
   "dependencies": {
-    "sea-map": "SolidarityEconomyAssociation/sea-map#semver:^0.1.25"
+    "sea-map": "github:SolidarityEconomyAssociation/sea-map#semver:^0.1.25"
   },
   "devDependencies": {}
 }
