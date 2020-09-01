@@ -1,1 +1,1 @@
-http://dev.data.solidarityeconomy.coop:8890/sparql
+http://prod.data.solidarityeconomy.coop:8890/sparql

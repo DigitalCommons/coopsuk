@@ -9,24 +9,24 @@ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 PREFIX ospostcode: <http://data.ordnancesurvey.co.uk/id/postcodeunit/>
 PREFIX rov: <http://www.w3.org/ns/regorg#>
 PREFIX osspatialrelations: <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/>
-PREFIX : <https://dev.lod.coop/coops-uk/>
+PREFIX : <https://lod.coop/coops-uk/>
 
 
 
 SELECT ?name ?uri ?within ?lat ?lng ?www ?tel ?email ?regorg ?sameas ?desc ?primaryActivity ?street ?locality ?postcode
-FROM <https://dev.lod.coop/dotcoop/>
-FROM <https://dev.lod.coop/coops-uk//>
+FROM <https://lod.coop/dotcoop/>
+FROM <https://lod.coop/coops-uk//>
 WHERE {
 
 {
-GRAPH <https://dev.lod.coop/coops-uk/> {
+GRAPH <https://lod.coop/coops-uk/> {
 ?uri rdf:type essglobal:SSEInitiative .
 ?uri owl:sameAs ?sameas.
 ?uri gr:name ?name .
 OPTIONAL { ?uri dc:description ?desc . }
 OPTIONAL { ?uri rov:hasRegisteredOrganization ?regorg . }
 }
-GRAPH <https://dev.lod.coop/dotcoop/> {
+GRAPH <https://lod.coop/dotcoop/> {
 ?sameas rdf:type essglobal:SSEInitiative .
 OPTIONAL { ?sameas foaf:homepage ?www . }
 
