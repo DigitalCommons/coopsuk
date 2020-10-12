@@ -1,0 +1,28 @@
+# Cross-platform formatting config
+# See https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+# 2 space indentation
+# Set default charset
+[*.{js,json,html}]
+indent_style = space
+indent_size = 2
+charset = utf-8
+
+# Tab indentation
+[Makefile,*.mk]
+indent_size = 4
+indent_style = tab
+
+# Matches the exact files either package.json or .travis.yml
+[{travis.yml}]
+indent_style = space
+indent_size = 2
+
