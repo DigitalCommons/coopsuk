@@ -26,4 +26,4 @@ WHERE {
 	?within geo:lat ?lat.
 	?within geo:long ?lng.
 }
-LIMIT 15286
+LIMIT 40000
