@@ -6,7 +6,6 @@ PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX essglobal: <https://w3id.solidarityeconomy.coop/essglobal/V2a/vocab/>
 PREFIX gr: <http://purl.org/goodrelations/v1#>
 PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-PREFIX ospostcode: <http://data.ordnancesurvey.co.uk/id/postcodeunit/>
 PREFIX rov: <http://www.w3.org/ns/regorg#>
 PREFIX osspatialrelations: <http://data.ordnancesurvey.co.uk/ontology/spatialrelations/>
 PREFIX : <https://lod.coop/coops-uk/>
@@ -27,4 +26,4 @@ WHERE {
 	?within geo:lat ?lat.
 	?within geo:long ?lng.
 }
-LIMIT 15286
+LIMIT 40000
