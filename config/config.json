@@ -1,7 +1,14 @@
 {
   "namedDatasets": ["coops-uk"],
   "namedDatasetsVerbose": ["Co-ops UK"],
-  "filterableFields": [{ "field": "locality", "label": "Regions" }],
+  "filterableFields": ["locality"],
+  "languages": ["EN","FR","ES","KO"],
+  "vocabularies": [
+    { "endpoint": "http:\/\/dev.data.solidarityeconomy.coop:8890/sparql",
+      "defaultGraphUri": "https:\/\/dev.lod.coop/dotcoop",
+      "uris": {}
+    }
+  ],
   "showDatasetsPanel" : true,
   "htmlTitle" : "COOPS UK"
 }
