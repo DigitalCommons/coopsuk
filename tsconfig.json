@@ -1,0 +1,19 @@
+{
+  "include": [
+    "node_modules/sea-map",
+    "src/**/*"
+  ],
+  "compilerOptions": {
+    "outDir": "./build/",
+    "paths": {
+      "sea-map/*": ["./node_modules/sea-map/www/map-app/*","../www/map-app/*"]
+    },
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "target": "es2019",
+    "lib": ["DOM", "ES2021"],
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node"
+  }
+}
