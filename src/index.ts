@@ -10,7 +10,7 @@ import { getAddress, getEmail, getTwitter } from "sea-map/app/view/map/default_p
 import * as versions from "./version.json";
 
 import about from "../config/about.html";
-//import { getPopup } from './popup.js';
+import { getPopup } from './popup';
 
 const config: ConfigData = {
   namedDatasets: ['coops-uk'],
@@ -57,6 +57,7 @@ const config: ConfigData = {
     }
   ],
   showDatasetsPanel: true,
+  customPopup: getPopup,
   aboutHtml: about,
   ...versions,
 };
