@@ -21,20 +21,25 @@ const config: ConfigData = {
     street: 'value',
     locality: 'value',    
     postcode: 'value',
+    baseMembershipType: {
+      type: 'vocab',
+      uri: 'bmt:',
+    },
     primaryActivity: {
       type: 'vocab',
       uri: 'aci:',
     },
-    regorg: {
+    orgStructure: {
       type: 'multi',
       of: {
         type: 'vocab',
         uri: 'os:',
+        from: 'regorg',
       },
     },
   },
   filterableFields: [
-    'locality',
+    'orgStructure', 'baseMembershipType', 'locality','primaryActivity'
   ],
   searchedFields: [
     'name', 'street', 'locality', 'postcode', 'description'
@@ -45,7 +50,8 @@ const config: ConfigData = {
     { endpoint: 'http:\/\/dev.data.solidarityeconomy.coop:8890/sparql',
       defaultGraphUri: 'https://dev.lod.coop/coops-uk',
       uris: {
-        'https:\/\/dev.lod.coop/essglobal/2.1/standard/activities-modified/': 'aci',
+        'https:\/\/dev.lod.coop/essglobal/2.1/standard/activities-ica/': 'aci',
+        'https:\/\/dev.lod.coop/essglobal/2.1/standard/base-membership-type/': 'bmt',
         'https:\/\/dev.lod.coop/essglobal/2.1/standard/organisational-structure/': 'os',
       }
     }
