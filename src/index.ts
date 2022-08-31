@@ -30,12 +30,9 @@ const config: ConfigData = {
       uri: 'aci:',
     },
     orgStructure: {
-      type: 'multi',
-      of: {
-        type: 'vocab',
-        uri: 'os:',
-        from: 'regorg',
-      },
+      type: 'vocab',
+      uri: 'os:',
+      from: 'regorg',
     },
   },
   filterableFields: [

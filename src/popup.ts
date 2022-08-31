@@ -55,8 +55,8 @@ function getBMT(initiative: Initiative, bmtVocab: Vocab) {
 
 function getOrgStructure(initiative: Initiative, osVocab: Vocab, acVocab: Vocab, qfVocab: Vocab) {
   if (!initiative.qualifier && initiative.orgStructure && initiative.orgStructure.length > 0) {
-    const terms = initiative.orgStructure.map((id: string) => osVocab.terms[id]).join(", ");
-    return `${osVocab.title}: ${terms}`;
+    const term = osVocab.terms[initiative.orgStructure];
+    return `${osVocab.title}: ${term}`;
   }
 
   if (!initiative.qualifier && initiative.regorg) {
