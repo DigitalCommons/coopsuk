@@ -36,7 +36,7 @@ const config: ConfigData = {
     },
   },
   filterableFields: [
-    'orgStructure', 'baseMembershipType', 'locality','primaryActivity'
+    'primaryActivity', 'orgStructure', 'baseMembershipType', 'locality'
   ],
   searchedFields: [
     'name', 'street', 'locality', 'postcode', 'description'
