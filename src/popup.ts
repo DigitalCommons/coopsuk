@@ -130,8 +130,12 @@ function getTwitter(initiative: Initiative) {
 
 export function getPopup(initiative: Initiative, sse_initiatives: DataServices) {
   function getTerm(propertyName: string) {
-    const vocabUri = sse_initiatives.getVocabUriForProperty(propertyName);
-    return sse_initiatives.getVocabTerm(vocabUri, initiative[propertyName]);
+    const propDef = sse_initiatives.getPropertySchema(propertyName);
+    if (propDef.type === 'vocab') {
+      const vocabUri = propDef.uri;
+      return sse_initiatives.getVocabTerm(vocabUri, initiative[propertyName]);
+    }
+    throw new Error(`can't get term for non-vocab property ${propertyName}`);
   }
 
   const values = sse_initiatives.getLocalisedVocabs();
