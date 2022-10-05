@@ -2,7 +2,7 @@ import { webRun, fetchConfigs} from "sea-map/index";
 
 // Re-export of ConfigData in sea-map/index above seems not to work,
 // so import it directly from here:
-import type { ConfigData } from  "sea-map/app/model/config_schema";
+import { ConfigData } from  "sea-map/app/model/config_schema";
 import type {
   Initiative, DataServices, CustomPropDef, InitiativeObj
 } from "sea-map/app/model/dataservices";
@@ -12,7 +12,7 @@ import * as versions from "./version.json";
 import about from "../config/about.html";
 import { getPopup } from './popup';
 
-const config: ConfigData = {
+const config: ConfigData = new ConfigData({
   namedDatasets: ['coops-uk'],
   htmlTitle: 'Co-ops UK',
   fields: {
@@ -57,6 +57,6 @@ const config: ConfigData = {
   customPopup: getPopup,
   aboutHtml: about,
   ...versions,
-};
+});
 
 webRun(window, config);
