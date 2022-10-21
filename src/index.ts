@@ -36,6 +36,9 @@ const rowToObj = mkObjTransformer<Row, InitiativeObj>({
   chNum: T.nullable.text(null).from('Companies House Number'),
   baseMembershipType: T.nullable.text(null).from('Membership Type'),
   within: T.nullable.text(null).from('Geo Container'),
+  cukSector: T.nullable.text(null).from('Sector'),
+  sicSection: T.nullable.text(null).from('SIC Section'),
+  sicCode: T.nullable.number(null).from('SIC Code'),
 });
 
 
@@ -60,6 +63,8 @@ const fields: FieldsDef = {
     uri: 'os:',
     from: 'regorg',
   },
+  cukSector: 'value',
+  sicSection: 'value',
 };
 
 
@@ -68,7 +73,7 @@ const config: ConfigData = new ConfigData({
   htmlTitle: 'Co-ops UK',
   fields: fields,
   filterableFields: [
-    'primaryActivity', 'orgStructure', 'baseMembershipType', 'locality'
+    'cukSector', 'sicSection', 'primaryActivity', 'orgStructure', 'baseMembershipType', 'locality'
   ],
   searchedFields: [
     'name', 'street', 'locality', 'postcode', 'description'

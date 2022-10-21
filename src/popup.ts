@@ -96,12 +96,21 @@ function getSecondaryActivities(initiative: Initiative, acVocab: Vocab, labels: 
   return '';
 }
 
-function getRelationship(initiative: Initiative, labels: Dictionary<string>) {
-  const title = labels.relationship || 'Relationship'; // FIXME unhack fallback
-  
-  if (initiative.relationship && initiative.relationship.length > 0) {
-    const term = initiative.relationship.join(", "); // FIXME how to localise?
-    return `${title}: ${term}`;
+function getCukSector(initiative: Initiative, labels: Dictionary<string>) {
+  const title = 'Sector (Coops UK)';
+
+  if (initiative.cukSector) {
+    return `${title}: ${initiative.cukSector}`;
+  }
+
+  return '';
+}
+
+function getSicSection(initiative: Initiative, labels: Dictionary<string>) {
+  const title = 'SIC Section';
+
+  if (initiative.sicSection) {
+    return `${title}: ${initiative.sicSection}`;
   }
 
   return '';
@@ -144,7 +153,8 @@ export function getPopup(initiative: Initiative, sse_initiatives: DataServices) 
     <div class="sea-initiative-details">
 	    <h2 class="sea-initiative-name">${initiative.name}</h2>
 	    ${getWebsite(initiative)}
-	    <h4 class="sea-initiative-base-membership-type">${getBMT(initiative, values["bmt:"])}</h4>
+	    <h4 class="sea-initiative-cuk-sector">${getCukSector(initiative, labels)}</h4>
+	    <h4 class="sea-initiative-sic-section">${getSicSection(initiative, labels)}</h4>
 	    <h4 class="sea-initiative-org-structure">${getOrgStructure(initiative, values["os:"], values["aci:"], values["qf:"])}</h4>
 	    <h4 class="sea-initiative-economic-activity">${getPrimaryActivity(initiative, values["aci:"])}</h4>
       <h5 class="sea-initiative-secondary-activity">${getSecondaryActivities(initiative, values["aci:"], labels)}</h5>
