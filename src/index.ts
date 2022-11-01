@@ -85,7 +85,7 @@ const config: ConfigData = new ConfigData({
       type: 'json',
       id: 'essglobal',
       label: 'ESSGLOBAL 2.1',
-      url: 'http://localhost:8080/vocabs.json',
+      url: '/vocabs.json',
     }
   ],
   dataSources: [
