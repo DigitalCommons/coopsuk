@@ -81,21 +81,14 @@ const config: ConfigData = new ConfigData({
   languages: ['EN', 'FR', 'ES', 'KO'],
   language: 'EN',
   vocabularies: [
-    { endpoint: 'http:\/\/dev.data.solidarityeconomy.coop:8890/sparql',
-      defaultGraphUri: 'https://dev.lod.coop/coops-uk',
-      uris: {
-        'https:\/\/dev.lod.coop/essglobal/2.1/standard/activities-ica/': 'aci',
-        'https:\/\/dev.lod.coop/essglobal/2.1/standard/base-membership-type/': 'bmt',
-        'https:\/\/dev.lod.coop/essglobal/2.1/standard/organisational-structure/': 'os',
-      }
+    {
+      type: 'json',
+      id: 'essglobal',
+      label: 'ESSGLOBAL 2.1',
+      url: 'http://localhost:8080/vocabs.json',
     }
   ],
   dataSources: [
-/*    {
-      id: 'coops-uk',
-      label: 'Coops UK',
-      type: 'hostSparql',
-    },*/
     {
       id: 'coops-uk2',
       label: 'Coops UK 2',
