@@ -1,12 +1,12 @@
 {
   "include": [
-    "node_modules/sea-map",
+    "node_modules/mykomap",
     "src/**/*"
   ],
   "compilerOptions": {
     "outDir": "./build/",
     "paths": {
-      "sea-map/*": ["./node_modules/sea-map/www/map-app/*","../www/map-app/*"]
+      "mykomap/*": ["./node_modules/mykomap/www/map-app/*","../www/map-app/*"]
     },
     "noImplicitAny": true,
     "sourceMap": true,

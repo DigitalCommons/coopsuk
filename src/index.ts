@@ -1,15 +1,15 @@
-import { webRun } from "sea-map/index";
+import { webRun } from "mykomap/index";
 
-// Re-export of ConfigData in sea-map/index above seems not to work,
+// Re-export of ConfigData in mykomap/index above seems not to work,
 // so import it directly from here:
-import { ConfigData } from  "sea-map/app/model/config_schema";
+import { ConfigData } from  "mykomap/app/model/config_schema";
 import type {
   PropDef, InitiativeObj
-} from "sea-map/app/model/dataservices";
+} from "mykomap/app/model/dataservices";
 import {
   mkObjTransformer,
   Transforms as T,
-} from "sea-map/obj-transformer";
+} from "mykomap/obj-transformer";
 import * as versions from "./version.json";
 
 import about from "../config/about.html";

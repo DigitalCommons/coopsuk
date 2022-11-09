@@ -1,6 +1,6 @@
-import type { Initiative, DataServices } from "sea-map/app/model/dataservices";
-import type { Dictionary } from 'sea-map/common_types';
-import type { Vocab } from "sea-map/app/model/vocabs";
+import type { Initiative, DataServices } from "mykomap/app/model/dataservices";
+import type { Dictionary } from 'mykomap/common_types';
+import type { Vocab } from "mykomap/app/model/vocabs";
 
 function getAddress(initiative: Initiative, getTerm: (prop: string) => string, labels: Dictionary<string>) {
   // We want to add the whole address into a single para

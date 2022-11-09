@@ -1,7 +1,7 @@
 {
   "name": "coopsuk",
   "version": "0.1.0",
-  "description": "Co-ops UK SEA mapping project",
+  "description": "Co-ops UK mapping project",
   "main": "index.js",
   "config": {
     "deploy_to": "",
@@ -9,7 +9,7 @@
     "deploy_group": "www-data"
   },
   "scripts": {
-    "build": "sea-site-build -c config -m node_modules/sea-map -d build src/*",
+    "build": "mykomap-site-build -c config -m node_modules/mykomap -d build src/*",
     "deploy": "set -x; rsync -avzc --rsync-path='sudo rsync' --delete --usermap=\"*:$npm_package_config_deploy_user\" --groupmap=\"*:$npm_package_config_deploy_group\" --exclude=build.txt --exclude=.* build/out/ \"${npm_package_config_deploy_to:?Please define the '$npm_package_name:deploy_to' npm config parameter}\"",
     "server": "php -t build/out -S localhost:8080"
   },
@@ -17,7 +17,7 @@
   "license": "UNLICENSED",
   "repository": "github:SolidarityEconomyAssociation/coopsuk",
   "dependencies": {
-    "sea-map": "github:SolidarityEconomyAssociation/sea-map#semver:^2.0.0"
+    "mykomap": "github:DigitalCommons/mykomap#v3.0.0"
   },
   "devDependencies": {}
 }
