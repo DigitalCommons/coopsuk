@@ -155,6 +155,7 @@ export function getPopup(initiative: Initiative, sse_initiatives: DataServices) 
 	    ${getWebsite(initiative)}
 	    <h4 class="sea-initiative-cuk-sector">${getCukSector(initiative, labels)}</h4>
 	    <h4 class="sea-initiative-sic-section">${getSicSection(initiative, labels)}</h4>
+	    <h4 class="sea-initiative-base-membership-type">${getBMT(initiative, values["bmt:"])}</h4>
 	    <h4 class="sea-initiative-org-structure">${getOrgStructure(initiative, values["os:"], values["aci:"], values["qf:"])}</h4>
 	    <h4 class="sea-initiative-economic-activity">${getPrimaryActivity(initiative, values["aci:"])}</h4>
       <h5 class="sea-initiative-secondary-activity">${getSecondaryActivities(initiative, values["aci:"], labels)}</h5>
