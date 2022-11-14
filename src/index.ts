@@ -36,7 +36,7 @@ const rowToObj = mkObjTransformer<Row, InitiativeObj>({
   chNum: T.nullable.text(null).from('Companies House Number'),
   baseMembershipType: T.nullable.text(null).from('Membership Type'),
   within: T.nullable.text(null).from('Geo Container'),
-  cukSector: T.nullable.text(null).from('Sector'),
+  cukSector: T.text('Unspecified').from('Sector'),
   sicSection: T.nullable.text(null).from('SIC Section'),
   sicCode: T.nullable.number(null).from('SIC Code'),
 });
