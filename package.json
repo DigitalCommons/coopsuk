@@ -2,14 +2,14 @@
   "name": "coopsuk",
   "version": "0.1.0",
   "description": "Co-ops UK mapping project",
-  "main": "index.js",
+  "main": "src/index.ts",
   "config": {
     "deploy_to": "",
     "deploy_user": "www-data",
     "deploy_group": "www-data"
   },
   "scripts": {
-    "build": "mykomap-site-build -c config -m node_modules/mykomap -d build www/*",
+    "build": "mykomap-site-build -c config -s src -m node_modules/mykomap -d build www/*",
     "deploy": "set -x; rsync -avzc --rsync-path='sudo rsync' --delete --usermap=\"*:$npm_package_config_deploy_user\" --groupmap=\"*:$npm_package_config_deploy_group\" --exclude=build.txt --exclude=.* build/out/ \"${npm_package_config_deploy_to:?Please define the '$npm_package_name:deploy_to' npm config parameter}\"",
     "server": "php -t build/out -S localhost:8080"
   },
