@@ -85,7 +85,7 @@ const config: ConfigData = new ConfigData({
       type: 'json',
       id: 'essglobal',
       label: 'ESSGLOBAL 2.1',
-      url: '/vocabs.json',
+      url: 'https://dev.data.solidarityeconomy.coop/coops-uk/vocabs.json',
     }
   ],
   dataSources: [
