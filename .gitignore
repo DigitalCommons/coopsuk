@@ -26,4 +26,4 @@ junk
 /build/
 /node_modules/
 npm-debug.log
-config/version.json
+/src/version.json
