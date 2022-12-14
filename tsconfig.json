@@ -1,8 +1,4 @@
 {
-  "include": [
-    "node_modules/mykomap",
-    "src/**/*"
-  ],
   "compilerOptions": {
     "outDir": "./build/",
     "paths": {
