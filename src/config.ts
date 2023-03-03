@@ -2,15 +2,18 @@
 // so import it directly from here:
 import { ConfigData } from  "mykomap/app/model/config-schema";
 import type {
-  PropDef, InitiativeObj
+  FieldDefs
 } from "mykomap/app/model/dataservices";
+import type {
+  InitiativeObj
+} from "mykomap/app/model/initiative";
 import {
   mkObjTransformer,
   Transforms as T,
 } from "mykomap/obj-transformer";
 import * as versions from "./version.json";
 
-import about from "../config/about.html";
+//import about from "../config/about.html";
 import { getPopup } from './popup';
 
 type Row = Record<string, string|null|undefined>;
@@ -40,9 +43,7 @@ const rowToObj = mkObjTransformer<Row, InitiativeObj>({
 });
 
 
-type Dictionary<T> = Partial<Record<string, T>>;
-type FieldsDef = Dictionary<PropDef | 'value' >;
-const fields: FieldsDef = {
+const fields: FieldDefs = {
   desc: 'value',
   www: 'value',
   street: 'value',

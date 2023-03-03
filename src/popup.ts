@@ -1,14 +1,16 @@
-import type { Initiative, DataServices } from "mykomap/app/model/dataservices";
+import type { DataServices } from "mykomap/app/model/dataservices";
 import type { Dictionary } from 'mykomap/common_types';
 import type { Vocab } from "mykomap/app/model/vocabs";
+import type { Initiative } from "mykomap/app/model/initiative";
 
 function getAddress(initiative: Initiative, getTerm: (prop: string) => string, labels: Dictionary<string>) {
   // We want to add the whole address into a single para
   // Not all orgs have an address
-  let address = "";
-  let street;
-  if (initiative.street) {
-    let streetArray = initiative.street.split(";");
+  let address: string = "";
+  let street: string;
+  const _street = initiative.street;
+  if (typeof _street === 'string') {
+    let streetArray = _street.split(";");
     for (let partial of streetArray) {
       if (partial === initiative.name) continue;
       if (street) street += "<br/>";
@@ -46,40 +48,45 @@ function getWebsite(initiative: Initiative) {
 }
 
 function getBMT(initiative: Initiative, bmtVocab: Vocab) {
-  if (initiative.baseMembershipType) {
-    return `${bmtVocab.title}: ${bmtVocab.terms[initiative.baseMembershipType]}`;
+  const bmt = initiative.baseMembershipType;
+  if (typeof bmt === 'string') {
+    return `${bmtVocab.title}: ${bmtVocab.terms[bmt]}`;
   }
 
   return `${bmtVocab.title}: Others`;
 }
 
 function getOrgStructure(initiative: Initiative, osVocab: Vocab, acVocab: Vocab, qfVocab: Vocab) {
-  if (!initiative.qualifier && initiative.orgStructure && initiative.orgStructure.length > 0) {
-    const term = osVocab.terms[initiative.orgStructure];
+  const qualifier = initiative.qualifier;
+  const orgStructure = initiative.orgStructure;
+  const regorg = initiative.regorg;
+  if (!qualifier && typeof orgStructure === 'string' && orgStructure.length > 0) {
+    const term = osVocab.terms[orgStructure];
     return `${osVocab.title}: ${term}`;
   }
 
-  if (!initiative.qualifier && initiative.regorg) {
-    if (!osVocab.terms[initiative.regorg])
-      console.error(`Unknown ${osVocab.title} vocab term ID: ${initiative.regorg}`);
-    return `${osVocab.title}: ${osVocab.terms[initiative.regorg]}`;
+  if (!qualifier && typeof regorg === 'string') {
+    if (!osVocab.terms[regorg])
+      console.error(`Unknown ${osVocab.title} vocab term ID: ${regorg}`);
+    return `${osVocab.title}: ${osVocab.terms[regorg]}`;
   }
 
-  if (initiative.qualifier) {
-    if (!qfVocab.terms[initiative.qualifier]) {
-      qfVocab.terms[initiative.qualifier] = "unknown";
-      console.error(`Unknown ${qfVocab.title} vocab term ID: ${initiative.qualifier}`);
+  if (typeof qualifier === 'string') {
+    if (!qfVocab.terms[qualifier]) {
+      qfVocab.terms[qualifier] = "unknown";
+      console.error(`Unknown ${qfVocab.title} vocab term ID: ${qualifier}`);
     }
 
-    return `${osVocab.title}: ${qfVocab.terms[initiative.qualifier]}`;
+    return `${osVocab.title}: ${qfVocab.terms[qualifier]}`;
   }
 
   return '';
 }
 
 function getPrimaryActivity(initiative: Initiative, acVocab: Vocab) {
-  if (initiative.primaryActivity && initiative.primaryActivity != "") {
-    return `Main Activity: ${acVocab.terms[initiative.primaryActivity]}`;
+  const primaryActivity = initiative.primaryActivity;
+  if (typeof primaryActivity === 'string' && primaryActivity != "") {
+    return `Main Activity: ${acVocab.terms[primaryActivity]}`;
   }
 
   return '';
@@ -87,9 +94,11 @@ function getPrimaryActivity(initiative: Initiative, acVocab: Vocab) {
 
 function getSecondaryActivities(initiative: Initiative, acVocab: Vocab, labels: Dictionary<string>) {
   const title = labels.secondaryActivities;
-
-  if (initiative.activities && initiative.activities.length > 0) {
-    const term = initiative.activities.map((id: string) => acVocab.terms[id]).join(", ");
+  const activities = initiative.activities;
+  if (activities instanceof Array && activities.length > 0) {
+    const term = activities
+      .filter((id): id is string => typeof id === 'string')
+      .map((id: string) => acVocab.terms[id]).join(", ");
     return `${title}: ${term}`;
   }
 
@@ -98,9 +107,9 @@ function getSecondaryActivities(initiative: Initiative, acVocab: Vocab, labels: 
 
 function getCukSector(initiative: Initiative, labels: Dictionary<string>) {
   const title = 'Sector (Coops UK)';
-
-  if (initiative.cukSector) {
-    return `${title}: ${initiative.cukSector}`;
+  const cukSector = initiative.cukSector;
+  if (typeof cukSector === 'string') {
+    return `${title}: ${cukSector}`;
   }
 
   return '';
@@ -108,9 +117,9 @@ function getCukSector(initiative: Initiative, labels: Dictionary<string>) {
 
 function getSicSection(initiative: Initiative, labels: Dictionary<string>) {
   const title = 'SIC Section';
-
-  if (initiative.sicSection) {
-    return `${title}: ${initiative.sicSection}`;
+  const sicSection = initiative.sicSection;
+  if (typeof sicSection === 'string') {
+    return `${title}: ${sicSection}`;
   }
 
   return '';
@@ -118,21 +127,22 @@ function getSicSection(initiative: Initiative, labels: Dictionary<string>) {
 
 function getEmail(initiative: Initiative) {
   // Not all orgs have an email
-  if (initiative.email)
-    return `<a class="fa fa-at" href="mailto:${initiative.email}" target="_blank" ></a>`;
+  const email = initiative.email;
+  if (typeof email === 'string')
+    return `<a class="fa fa-at" href="mailto:${email}" target="_blank" ></a>`;
   return "";
 }
 
 function getFacebook(initiative: Initiative) {
   // not all have a facebook
-  if (initiative.facebook)
+  if (typeof initiative.facebook === 'string')
     return `<a class="fab fa-facebook" href="https://facebook.com/${initiative.facebook}" target="_blank" ></a>`;
   return "";
 }
 
 function getTwitter(initiative: Initiative) {
   // not all have twitter
-  if (initiative.twitter)
+  if (typeof initiative.twitter === 'string')
     return `<a class="fab fa-twitter" href="https://twitter.com/${initiative.twitter}" target="_blank" ></a>`;
   return '';
 }
@@ -140,9 +150,10 @@ function getTwitter(initiative: Initiative) {
 export function getPopup(initiative: Initiative, sse_initiatives: DataServices) {
   function getTerm(propertyName: string) {
     const propDef = sse_initiatives.getPropertySchema(propertyName);
-    if (propDef.type === 'vocab') {
+    const val = initiative[propertyName];
+    if (propDef.type === 'vocab' && typeof val === 'string') {
       const vocabUri = propDef.uri;
-      return sse_initiatives.getVocabTerm(vocabUri, initiative[propertyName]);
+      return sse_initiatives.getVocabTerm(vocabUri, val);
     }
     throw new Error(`can't get term for non-vocab property ${propertyName}`);
   }
