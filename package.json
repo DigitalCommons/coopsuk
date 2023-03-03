@@ -13,11 +13,11 @@
     "deploy": "mykomap-site-deploy -f build/out/",
     "server": "php -t build/out -S localhost:8080"
   },
-  "author": "Solidarity Economy Association",
+  "author": "Digital Commons Cooperative",
   "license": "UNLICENSED",
-  "repository": "github:SolidarityEconomyAssociation/coopsuk",
+  "repository": "github:DigitalCommons/coopsuk",
   "dependencies": {
-    "mykomap": "github:DigitalCommons/mykomap#v3.0.2"
+    "mykomap": "github:DigitalCommons/mykomap#v3.0.5"
   },
   "devDependencies": {}
 }
