@@ -3,7 +3,7 @@
 import { ConfigData } from  "mykomap/app/model/config-schema";
 import type {
   FieldDefs
-} from "mykomap/app/model/dataservices";
+} from "mykomap/app/model/data-services";
 import type {
   InitiativeObj
 } from "mykomap/app/model/initiative";

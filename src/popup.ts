@@ -1,4 +1,4 @@
-import type { DataServices } from "mykomap/app/model/dataservices";
+import type { DataServices } from "mykomap/app/model/data-services";
 import type { Vocab } from "mykomap/app/model/vocabs";
 import type { Initiative } from "mykomap/app/model/initiative";
 import { PhraseBook } from "mykomap/localisations";
