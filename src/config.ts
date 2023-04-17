@@ -1,9 +1,9 @@
 // Re-export of ConfigData in mykomap/index above seems not to work,
 // so import it directly from here:
-import { ConfigData } from  "mykomap/app/model/config-schema";
+import { ConfigData } from  "mykomap/app/model/config_schema";
 import type {
   FieldDefs
-} from "mykomap/app/model/data-services";
+} from "mykomap/app/model/dataservices";
 import type {
   InitiativeObj
 } from "mykomap/app/model/initiative";

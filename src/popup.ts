@@ -1,9 +1,9 @@
-import type { DataServices } from "mykomap/app/model/data-services";
+import type { DataServices } from "mykomap/app/model/dataservices";
+import type { Dictionary } from 'mykomap/common_types';
 import type { Vocab } from "mykomap/app/model/vocabs";
 import type { Initiative } from "mykomap/app/model/initiative";
-import { PhraseBook } from "mykomap/localisations";
 
-function getAddress(initiative: Initiative, getTerm: (prop: string) => string, labels: PhraseBook) {
+function getAddress(initiative: Initiative, getTerm: (prop: string) => string, labels: Dictionary<string>) {
   // We want to add the whole address into a single para
   // Not all orgs have an address
   let address: string = "";
@@ -92,7 +92,7 @@ function getPrimaryActivity(initiative: Initiative, acVocab: Vocab) {
   return '';
 }
 
-function getSecondaryActivities(initiative: Initiative, acVocab: Vocab, labels: PhraseBook) {
+function getSecondaryActivities(initiative: Initiative, acVocab: Vocab, labels: Dictionary<string>) {
   const title = labels.secondaryActivities;
   const activities = initiative.activities;
   if (activities instanceof Array && activities.length > 0) {
@@ -105,7 +105,7 @@ function getSecondaryActivities(initiative: Initiative, acVocab: Vocab, labels: 
   return '';
 }
 
-function getCukSector(initiative: Initiative, labels: PhraseBook) {
+function getCukSector(initiative: Initiative, labels: Dictionary<string>) {
   const title = 'Sector (Coops UK)';
   const cukSector = initiative.cukSector;
   if (typeof cukSector === 'string') {
@@ -115,7 +115,7 @@ function getCukSector(initiative: Initiative, labels: PhraseBook) {
   return '';
 }
 
-function getSicSection(initiative: Initiative, labels: PhraseBook) {
+function getSicSection(initiative: Initiative, labels: Dictionary<string>) {
   const title = 'SIC Section';
   const sicSection = initiative.sicSection;
   if (typeof sicSection === 'string') {
