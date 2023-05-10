@@ -96,7 +96,7 @@ export const config: ConfigData = new ConfigData({
     },
   ],
   defaultLatLng: [52.476, -5.449],
-  showDatasetsPanel: true,
+  showDatasetsPanel: false,
   customPopup: getPopup,
   aboutHtml: about,
   ...versions,
