@@ -98,6 +98,6 @@ export const config: ConfigData = new ConfigData({
   defaultLatLng: [52.476, -5.449],
   showDatasetsPanel: true,
   customPopup: getPopup,
-  aboutHtml: "about", // FIXME remove, want the default
+  aboutHtml: about,
   ...versions,
 });
