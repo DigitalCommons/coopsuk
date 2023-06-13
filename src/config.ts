@@ -72,7 +72,8 @@ export const config: ConfigData = new ConfigData({
   htmlTitle: 'Co-ops UK',
   fields: fields,
   filterableFields: [
-    'cukSector', 'sicSection', 'primaryActivity', 'orgStructure', 'baseMembershipType', 'locality'
+    //'cukSector', 'sicSection',
+    'primaryActivity', 'orgStructure', 'baseMembershipType', //'locality'
   ],
   searchedFields: [
     'name', 'street', 'locality', 'postcode', 'description'
