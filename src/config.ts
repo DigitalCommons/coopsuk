@@ -1,9 +1,9 @@
 // Re-export of ConfigData in mykomap/index above seems not to work,
 // so import it directly from here:
-import { ConfigData } from  "mykomap/app/model/config_schema";
+import { ConfigData } from  "mykomap/app/model/config-schema";
 import type {
-  PropDef, InitiativeObj
-} from "mykomap/app/model/dataservices";
+  PropDef
+} from "mykomap/app/model/data-services";
 import {
   mkObjTransformer,
   Transforms as T,
@@ -12,6 +12,7 @@ import * as versions from "./version.json";
 
 import about from "../config/about.html";
 import { getPopup } from './popup';
+import { InitiativeObj } from "mykomap/src/map-app/app/model/initiative";
 
 type Row = Record<string, string|null|undefined>;
 const baseUri = 'https://dev.lod.coop/coops-uk/';
