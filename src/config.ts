@@ -10,7 +10,7 @@ import {
 } from "mykomap/obj-transformer";
 import * as versions from "./version.json";
 
-import about from "../config/about.html";
+import about from "./about.html";
 import { getPopup } from './popup';
 import { InitiativeObj } from "mykomap/src/map-app/app/model/initiative";
 
