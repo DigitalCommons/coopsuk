@@ -27,7 +27,6 @@ const rowToObj = mkObjTransformer<Row, InitiativeObj>({
   desc: T.text('').from('Description'),
   regorg: T.nullable.text(null).from('Organisational Structure'),
   primaryActivity: T.nullable.text(null).from('Primary Activity'),
-  activity: T.multi({of: T.text(''), omit: ['']}).from('Activities'),
   street: T.text('').from('Street Address'),
   locality: T.text('').from('Locality'),
   postcode: T.text('').from('Postcode'),
