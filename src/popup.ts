@@ -54,7 +54,7 @@ function getBMT(initiative: Initiative, bmtVocab: Vocab) {
   return `${bmtVocab.title}: Others`;
 }
 
-function getOrgStructure(initiative: Initiative, osVocab: Vocab, qfVocab: Vocab) {
+function getOrgStructure(initiative: Initiative, osVocab: Vocab) {
   if (!initiative.qualifier && typeof initiative.orgStructure === 'string') {
     const term = osVocab.terms[initiative.orgStructure];
     return `${osVocab.title}: ${term}`;
@@ -64,15 +64,6 @@ function getOrgStructure(initiative: Initiative, osVocab: Vocab, qfVocab: Vocab)
     if (!osVocab.terms[initiative.regorg])
       console.error(`Unknown ${osVocab.title} vocab term ID: ${initiative.regorg}`);
     return `${osVocab.title}: ${osVocab.terms[initiative.regorg]}`;
-  }
-
-  if (typeof initiative.qualifier === 'string') {
-    if (!qfVocab.terms[initiative.qualifier]) {
-      qfVocab.terms[initiative.qualifier] = "unknown";
-      console.error(`Unknown ${qfVocab.title} vocab term ID: ${initiative.qualifier}`);
-    }
-
-    return `${osVocab.title}: ${qfVocab.terms[initiative.qualifier]}`;
   }
 
   return '';
@@ -160,7 +151,7 @@ export function getPopup(initiative: Initiative, sse_initiatives: DataServices) 
 	    <h4 class="sea-initiative-cuk-sector">${getCukSector(initiative, labels)}</h4>
 	    <h4 class="sea-initiative-sic-section">${getSicSection(initiative, labels)}</h4>
 	    <h4 class="sea-initiative-base-membership-type">${getBMT(initiative, values["bmt:"])}</h4>
-	    <h4 class="sea-initiative-org-structure">${getOrgStructure(initiative, values["os:"], values["qf:"])}</h4>
+	    <h4 class="sea-initiative-org-structure">${getOrgStructure(initiative, values["os:"])}</h4>
 	    <h4 class="sea-initiative-economic-activity">${getPrimaryActivity(initiative, values["aci:"])}</h4>
       <h5 class="sea-initiative-secondary-activity">${getSecondaryActivities(initiative, values["aci:"], labels)}</h5>
       <p>${initiative.desc || ''}</p>
