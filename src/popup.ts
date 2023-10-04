@@ -129,21 +129,21 @@ function getTwitter(initiative: Initiative) {
   return '';
 }
 
-export function getPopup(initiative: Initiative, sse_initiatives: DataServices) {
+export function getPopup(initiative: Initiative, dataservices: DataServices) {
   function getTerm(propertyName: string) {
-    const propDef = sse_initiatives.getPropertySchema(propertyName);
+    const propDef = dataservices.getPropertySchema(propertyName);
     const term = initiative[propertyName];
     if (typeof term !== 'string')
       throw new Error(`non-string value for property ${propertyName}`);  
     if (propDef.type === 'vocab') {
       const vocabUri = propDef.uri;
-      return sse_initiatives.getVocabTerm(vocabUri, term);
+      return dataservices.getVocabTerm(vocabUri, term);
     }
     throw new Error(`can't get term for non-vocab property ${propertyName}`);
   }
 
-  const values = sse_initiatives.getLocalisedVocabs();
-  const labels = sse_initiatives.getFunctionalLabels();
+  const values = dataservices.getLocalisedVocabs();
+  const labels = dataservices.getFunctionalLabels();
   let popupHTML = `
     <div class="sea-initiative-details">
 	    <h2 class="sea-initiative-name">${initiative.name}</h2>
