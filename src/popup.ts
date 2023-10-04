@@ -1,7 +1,7 @@
 import type { DataServices } from "mykomap/app/model/data-services";
 import type { Vocab } from "mykomap/app/model/vocabs";
-import { Initiative } from "mykomap/src/map-app/app/model/initiative";
-import { PhraseBook } from "mykomap/src/map-app/localisations";
+import { Initiative } from "mykomap/app/model/initiative";
+import { PhraseBook } from "mykomap/localisations";
 
 function getAddress(initiative: Initiative, getTerm: (prop: string) => string, labels: PhraseBook) {
   // We want to add the whole address into a single para
