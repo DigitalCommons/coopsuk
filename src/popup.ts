@@ -1,5 +1,4 @@
-import type { DataServices } from "mykomap/app/model/data-services";
-import type { Vocab } from "mykomap/app/model/vocabs";
+import { DataServices, isVocabPropDef } from "mykomap/app/model/data-services";
 import { Initiative } from "mykomap/app/model/initiative";
 import { PhraseBook } from "mykomap/localisations";
 
@@ -46,67 +45,6 @@ function getWebsite(initiative: Initiative) {
   return '';
 }
 
-function getBMT(initiative: Initiative, bmtVocab: Vocab) {
-  if (typeof initiative.baseMembershipType === 'string') {
-    return `${bmtVocab.title}: ${bmtVocab.terms[initiative.baseMembershipType]}`;
-  }
-
-  return `${bmtVocab.title}: Others`;
-}
-
-function getOrgStructure(initiative: Initiative, osVocab: Vocab) {
-  if (!initiative.qualifier && typeof initiative.orgStructure === 'string') {
-    const term = osVocab.terms[initiative.orgStructure];
-    return `${osVocab.title}: ${term}`;
-  }
-
-  if (!initiative.qualifier && typeof initiative.regorg === 'string') {
-    if (!osVocab.terms[initiative.regorg])
-      console.error(`Unknown ${osVocab.title} vocab term ID: ${initiative.regorg}`);
-    return `${osVocab.title}: ${osVocab.terms[initiative.regorg]}`;
-  }
-
-  return '';
-}
-
-function getPrimaryActivity(initiative: Initiative, acVocab: Vocab) {
-  if (typeof initiative.primaryActivity === 'string' && initiative.primaryActivity != "") {
-    return `Main Activity: ${acVocab.terms[initiative.primaryActivity]}`;
-  }
-
-  return '';
-}
-
-function getSecondaryActivities(initiative: Initiative, acVocab: Vocab, labels: PhraseBook) {
-  const title = labels.secondaryActivities;
-
-  if (initiative.activities instanceof Array && initiative.activities.length > 0) {
-    const term = initiative.activities.map((id: unknown) => acVocab.terms[String(id)]).join(", ");
-    return `${title}: ${term}`;
-  }
-
-  return '';
-}
-
-function getCukSector(initiative: Initiative, labels: PhraseBook) {
-  const title = 'Sector (Coops UK)';
-
-  if (initiative.cukSector) {
-    return `${title}: ${initiative.cukSector}`;
-  }
-
-  return '';
-}
-
-function getSicSection(initiative: Initiative, labels: PhraseBook) {
-  const title = 'SIC Section';
-
-  if (initiative.sicSection) {
-    return `${title}: ${initiative.sicSection}`;
-  }
-
-  return '';
-}
 
 function getEmail(initiative: Initiative) {
   // Not all orgs have an email
@@ -130,30 +68,75 @@ function getTwitter(initiative: Initiative) {
 }
 
 export function getPopup(initiative: Initiative, dataservices: DataServices) {
-  function getTerm(propertyName: string) {
+  const vocabs = dataservices.getVocabs();
+  const lang = dataservices.getLanguage();
+  const labels = dataservices.getFunctionalLabels();
+  
+  function getTerms(propertyName: string): string[] {
     const propDef = dataservices.getPropertySchema(propertyName);
-    const term = initiative[propertyName];
-    if (typeof term !== 'string')
-      throw new Error(`non-string value for property ${propertyName}`);  
-    if (propDef.type === 'vocab') {
-      const vocabUri = propDef.uri;
-      return dataservices.getVocabTerm(vocabUri, term);
+    const propVal = initiative[propertyName];
+    if (isVocabPropDef(propDef)) {
+      if (propDef.type === 'multi' && propVal instanceof Array) {
+        return propVal.map((val:unknown) => vocabs.getTerm(String(val), lang));
+      }
+      if (typeof propVal === 'string')
+        return [vocabs.getTerm(propVal, lang)];
+      if (propVal === undefined)
+        return [labels.notAvailable];
+      throw new Error(`invalid vocab property value for ${propertyName}: ${propVal}`);
     }
     throw new Error(`can't get term for non-vocab property ${propertyName}`);
   }
+  
+  function getTerm(propertyName: string, defaultVal?: string): string {
+    const vals = getTerms(propertyName);
+    if (vals.length > 0)
+      return vals[0];
+    if (defaultVal !== undefined)
+      return defaultVal;
+    return labels.notAvailable;
+  }
 
-  const values = dataservices.getLocalisedVocabs();
-  const labels = dataservices.getFunctionalLabels();
+  function getTitleVal(propertyName: string, title: string, defaultVal?: string) {
+    const propVal = initiative[propertyName];
+    if (defaultVal === null)
+      defaultVal = labels.notAvailable;
+    let val = defaultVal;
+    if (typeof propVal === 'string') {
+      val = propVal;
+    }
+    return `${title}: ${val}`;
+  }
+  function getTitleTerm(propertyName: string, title: string, defaultVal?: string) {
+    if (defaultVal === null)
+      defaultVal = labels.notAvailable;
+    let val = defaultVal;
+    const propDef = dataservices.getPropertySchema(propertyName);
+    const propVal = initiative[propertyName];
+    if (propDef.type === 'multi') {
+      if (propVal instanceof Array)
+        val = propVal.map((v: unknown) => vocabs.getTerm(String(v), lang, defaultVal)).join(', ');
+      else
+        val = defaultVal;
+    }
+    else {
+      if (typeof propVal === 'string')
+        val = vocabs.getTerm(propVal, lang, defaultVal);
+      else
+        val = defaultVal;
+    }
+    return `${title}: ${val}`;
+  }
+
   let popupHTML = `
     <div class="sea-initiative-details">
 	    <h2 class="sea-initiative-name">${initiative.name}</h2>
 	    ${getWebsite(initiative)}
-	    <h4 class="sea-initiative-cuk-sector">${getCukSector(initiative, labels)}</h4>
-	    <h4 class="sea-initiative-sic-section">${getSicSection(initiative, labels)}</h4>
-	    <h4 class="sea-initiative-base-membership-type">${getBMT(initiative, values["bmt:"])}</h4>
-	    <h4 class="sea-initiative-org-structure">${getOrgStructure(initiative, values["os:"])}</h4>
-	    <h4 class="sea-initiative-economic-activity">${getPrimaryActivity(initiative, values["aci:"])}</h4>
-      <h5 class="sea-initiative-secondary-activity">${getSecondaryActivities(initiative, values["aci:"], labels)}</h5>
+	    <h4 class="sea-initiative-cuk-sector">${getTitleVal('cukSector', 'Sector (Co-ops UK)')}</h4>
+	    <h4 class="sea-initiative-sic-section">${getTitleVal('sicSection', 'SIC Section')}</h4>
+	    <h4 class="sea-initiative-base-membership-type">${getTitleTerm('baseMembershipType', 'Base Membership Type')}</h4>
+	    <h4 class="sea-initiative-org-structure">${getTitleTerm('orgStructure', 'Organisational Structure')}</h4>
+	    <h4 class="sea-initiative-economic-activity">${getTitleTerm('primaryActivity', 'Primary Activity')}</h4>
       <p>${initiative.desc || ''}</p>
     </div>
     
