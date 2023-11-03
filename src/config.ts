@@ -25,7 +25,7 @@ const rowToObj = mkObjTransformer<Row, InitiativeObj>({
   manLat: T.nullable.number(null).from('Geo Container Latitude'),
   manLng: T.nullable.number(null).from('Geo Container Longitude'),
   desc: T.text('').from('Description'),
-  regorg: T.nullable.text(null).from('Organisational Structure'),
+  orgStructure: T.nullable.text(null).from('Organisational Structure'),
   primaryActivity: T.nullable.text(null).from('Primary Activity'),
   street: T.text('').from('Street Address'),
   locality: T.text('').from('Locality'),
@@ -59,10 +59,12 @@ const fields: FieldsDef = {
   orgStructure: {
     type: 'vocab',
     uri: 'os:',
-    from: 'regorg',
+    from: 'orgStructure',
   },
   cukSector: 'value',
   sicSection: 'value',
+  confidence: 'value',
+  geocodedAddr: 'value',
 };
 
 
