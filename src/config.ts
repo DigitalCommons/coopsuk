@@ -77,7 +77,7 @@ export const config: ConfigData = new ConfigData({
     'primaryActivity', 'orgStructure', 'baseMembershipType', //'locality'
   ],
   searchedFields: [
-    'name', 'street', 'locality', 'postcode', 'description'
+    'name', 'street', 'locality', 'postcode', 'description', 'www',
   ],
   languages: ['EN', 'FR', 'ES', 'KO'],
   language: 'EN',
