@@ -5,6 +5,7 @@ import type {
   PropDef
 } from "mykomap/app/model/data-services";
 import {
+  DataVal,
   mkObjTransformer,
   Transforms as T,
 } from "mykomap/obj-transformer";
@@ -14,10 +15,9 @@ import about from "./about.html";
 import { getPopup } from './popup';
 import { InitiativeObj } from "mykomap/app/model/initiative";
 
-type Row = Record<string, string|null|undefined>;
 const baseUri = 'https://dev.lod.coop/coops-uk/';
 
-const rowToObj = mkObjTransformer<Row, InitiativeObj>({
+const rowToObj = mkObjTransformer<Record<string, DataVal>, InitiativeObj>({
   uri: T.prefixed(baseUri).from('Identifier'),
   name: T.text('').from('Name'),
   lat: T.nullable.number(null).from('Latitude'),
