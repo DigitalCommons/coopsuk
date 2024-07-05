@@ -17,7 +17,7 @@
   "license": "UNLICENSED",
   "repository": "github:DigitalCommons/coopsuk",
   "dependencies": {
-    "mykomap": "github:DigitalCommons/mykomap#v3.0.7"
+    "mykomap": "github:DigitalCommons/mykomap#v3.1.7"
   },
   "devDependencies": {}
 }

@@ -5,6 +5,7 @@ import type {
   PropDef
 } from "mykomap/app/model/data-services";
 import {
+  DataVal,
   mkObjTransformer,
   Transforms as T,
 } from "mykomap/obj-transformer";
@@ -12,12 +13,11 @@ import * as versions from "./version.json";
 
 import about from "./about.html";
 import { getPopup } from './popup';
-import { InitiativeObj } from "mykomap/src/map-app/app/model/initiative";
+import { InitiativeObj } from "mykomap/app/model/initiative";
 
-type Row = Record<string, string|null|undefined>;
 const baseUri = 'https://lod.coop/coops-uk/';
 
-const rowToObj = mkObjTransformer<Row, InitiativeObj>({
+const rowToObj = mkObjTransformer<Record<string, DataVal>, InitiativeObj>({
   uri: T.prefixed(baseUri).from('Identifier'),
   name: T.text('').from('Name'),
   lat: T.nullable.number(null).from('Latitude'),
@@ -25,7 +25,7 @@ const rowToObj = mkObjTransformer<Row, InitiativeObj>({
   manLat: T.nullable.number(null).from('Geo Container Latitude'),
   manLng: T.nullable.number(null).from('Geo Container Longitude'),
   desc: T.text('').from('Description'),
-  regorg: T.nullable.text(null).from('Organisational Structure'),
+  orgStructure: T.nullable.text(null).from('Organisational Structure'),
   primaryActivity: T.nullable.text(null).from('Primary Activity'),
   street: T.text('').from('Street Address'),
   locality: T.text('').from('Locality'),
@@ -59,10 +59,12 @@ const fields: FieldsDef = {
   orgStructure: {
     type: 'vocab',
     uri: 'os:',
-    from: 'regorg',
+    from: 'orgStructure',
   },
   cukSector: 'value',
   sicSection: 'value',
+  confidence: 'value',
+  geocodedAddr: 'value',
 };
 
 
@@ -75,7 +77,7 @@ export const config: ConfigData = new ConfigData({
     'primaryActivity', 'orgStructure', 'baseMembershipType', //'locality'
   ],
   searchedFields: [
-    'name', 'street', 'locality', 'postcode', 'description'
+    'name', 'street', 'locality', 'postcode', 'description', 'www',
   ],
   languages: ['EN', 'FR', 'ES', 'KO'],
   language: 'EN',
