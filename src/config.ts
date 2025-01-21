@@ -86,7 +86,7 @@ export const config: ConfigData = new ConfigData({
       type: 'json',
       id: 'essglobal',
       label: 'ESSGLOBAL 2.1',
-      url: 'https://data.solidarityeconomy.coop/coops-uk/vocabs.json',
+      url: 'https://data.digitalcommons.coop/coops-uk/vocabs.json',
     }
   ],
   dataSources: [
@@ -94,7 +94,7 @@ export const config: ConfigData = new ConfigData({
       id: 'coops-uk2',
       label: 'Coops UK 2',
       type: 'csv',
-      url: 'https://data.solidarityeconomy.coop/coops-uk/standard.csv',
+      url: 'https://data.digitalcommons.coop/coops-uk/standard.csv',
       transform: rowToObj,
     },
   ],
